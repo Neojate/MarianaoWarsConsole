@@ -57,9 +57,5 @@ namespace MarianaoWarsConsole
             MarianaoLogic.UpdateResources(computer, systemResources);
         }
 
-        private void Saves(Computer computer)
-        {
-            
-        }
     }
 }
