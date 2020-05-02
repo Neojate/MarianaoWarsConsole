@@ -27,6 +27,10 @@ namespace MarianaoWarsConsole.Data
 
         public DbSet<SystemResource> SystemResource { get; set; }
 
+        public DbSet<SystemSoftware> SystemSoftware { get; set; }
+
+        public DbSet<BuildOrder> BuildOrder { get; set; }
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

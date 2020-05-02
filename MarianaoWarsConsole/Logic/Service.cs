@@ -48,6 +48,18 @@ namespace MarianaoWarsConsole.Logic
         {
             return dbContext.SystemResource.ToList();
         }
+
+        public List<SystemSoftware> GetSystemSoftware()
+        {
+            return dbContext.SystemSoftware.ToList();
+        }
+
+        public List<BuildOrder> GetBuildOrder(int computerId)
+        {
+            return dbContext.BuildOrder
+                .Where(order => order.ComputerId == computerId)
+                .ToList();
+        }
         #endregion
 
 
@@ -56,6 +68,17 @@ namespace MarianaoWarsConsole.Logic
         public void UpdateComputer(Computer computer)
         {
             dbContext.Update(computer);
+            dbContext.SaveChanges();
+        }
+        #endregion
+
+
+
+        #region DELETE
+        public void DeleteBuildOrder(int buildOrderId)
+        {
+            BuildOrder buildOrder = dbContext.BuildOrder.Find(buildOrderId);
+            dbContext.BuildOrder.Remove(buildOrder);
             dbContext.SaveChanges();
         }
         #endregion

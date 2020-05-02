@@ -7,20 +7,26 @@ namespace MarianaoWars.Models
 {
     public class Resource
     {
+        //Accesos
+        public const int KNOWLEDGE = 0;
+        public const int INGENYOUS = 1;
+        public const int COFFEE = 2;
+        public const int STRESS = 3;
+
         // ID del Resource. Primary Key Autoincremental.
         public int Id { get; set; }
 
         // Indica el almacenamiento de Conocimiento invertidos en el ordenador.
-        public int Knowledge { get; set; }
+        public double Knowledge { get; set; }
 
         // Indica el almacenamiento de Habilidad invertidos en el ordenador.
-        public int Ingenyous { get; set; }
+        public double Ingenyous { get; set; }
 
         // Indica el almacenamiento de Café invertidos en el ordenador.
-        public int Coffe { get; set; }
+        public double Coffe { get; set; }
 
         // Indica el almacenamiento de Estrés invertidos en el ordenador.
-        public int Stress { get; set; }
+        public double Stress { get; set; }
 
         // Indica el nivel de minas de Conocimiento del ordenador.
         public int KnowledgeLevel { get; set; }

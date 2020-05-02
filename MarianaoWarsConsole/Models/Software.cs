@@ -7,6 +7,14 @@ namespace MarianaoWars.Models
 {
     public class Software
     {
+        // Accesos
+        public const int GEDIT = 0;
+        public const int MYSQL = 1;
+        public const int GITHUB = 2;
+        public const int STACKOVERFLOW = 3;
+        public const int POSTMAN = 4;
+        public const int VIRTUALMACHINE = 5;
+
         // ID del Software. Primary Key Autoincremental.
         public int Id { get; set; }
 
