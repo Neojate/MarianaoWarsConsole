@@ -28,8 +28,8 @@ namespace MarianaoWarsConsole.Logic
             int maxResource = int.Parse(mySql.Action1.Split(',')[computer.Software.MySqlVersion]);
 
             //modificador por estrés
-            int modStress = 1;
-            if (finalStress < 0) modStress = 1; //cambiar
+            double modStress = 1;
+            if (finalStress < 0) modStress = 0.5; //cambiar
 
             //conocimiento
             if (computer.Resource.Knowledge < maxResource)
@@ -37,11 +37,11 @@ namespace MarianaoWarsConsole.Logic
 
             //ingenio
             if (computer.Resource.Ingenyous < maxResource)
-                computer.Resource.Ingenyous += int.Parse(ingenyous.Increment.Split(',')[computer.Resource.IngenyousLevel - 1]) * modStress / MINUT;
+                computer.Resource.Ingenyous += double.Parse(ingenyous.Increment.Split(',')[computer.Resource.IngenyousLevel - 1]) * modStress / MINUT;
 
             //café
             if (computer.Resource.Coffe < maxResource)
-                computer.Resource.Coffe += int.Parse(coffee.Increment.Split(',')[computer.Resource.CoffeLevel - 1]) * modStress / MINUT;
+                computer.Resource.Coffe += double.Parse(coffee.Increment.Split(',')[computer.Resource.CoffeLevel - 1]) * modStress / MINUT;
 
             //sleep
             computer.Resource.Stress = finalStress;
