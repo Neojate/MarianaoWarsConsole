@@ -75,6 +75,22 @@ namespace MarianaoWarsConsole.Logic
                     computer.Software.MySqlVersion += 1;
                     break;
 
+                case 23:
+                    computer.Software.GitHubVersion += 1;
+                    break;
+
+                case 24:
+                    computer.Software.StackOverFlowVersion += 1;
+                    break;
+
+                case 25:
+                    computer.Software.PostManVersion += 1;
+                    break;
+
+                case 22:
+                    computer.Software.VirtualMachineVersion += 1;
+                    break;
+
             }
         }
 
