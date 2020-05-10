@@ -87,7 +87,7 @@ namespace MarianaoWarsConsole.Logic
                     computer.Software.PostManVersion += 1;
                     break;
 
-                case 22:
+                case 26:
                     computer.Software.VirtualMachineVersion += 1;
                     break;
 
