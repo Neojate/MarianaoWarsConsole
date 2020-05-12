@@ -17,10 +17,10 @@ namespace MarianaoWarsConsole.Logic
             SystemResource stress = systemResources[Resource.STRESS];
 
             //cálculo estrés
-            int knowledgeStress = int.Parse(knowledge.Sleep.Split(',')[computer.Resource.KnowledgeLevel - 1]);
-            int ingenyousStress = int.Parse(ingenyous.Sleep.Split(',')[computer.Resource.IngenyousLevel - 1]);
-            int coffeStress = int.Parse(coffee.Sleep.Split(',')[computer.Resource.CoffeLevel - 1]);
-            int currentStress = int.Parse(stress.Increment.Split(',')[computer.Resource.StressLevel - 1]);
+            int knowledgeStress = int.Parse(knowledge.Sleep.Split(',')[computer.Resource.KnowledgeLevel]);
+            int ingenyousStress = int.Parse(ingenyous.Sleep.Split(',')[computer.Resource.IngenyousLevel]);
+            int coffeStress = int.Parse(coffee.Sleep.Split(',')[computer.Resource.CoffeLevel]);
+            int currentStress = int.Parse(stress.Increment.Split(',')[computer.Resource.StressLevel]);
             int finalStress = currentStress - knowledgeStress - ingenyousStress - coffeStress;
 
             //almacenamiento
@@ -33,15 +33,15 @@ namespace MarianaoWarsConsole.Logic
 
             //conocimiento
             if (computer.Resource.Knowledge < maxResource)
-                computer.Resource.Knowledge += double.Parse(knowledge.Increment.Split(',')[computer.Resource.KnowledgeLevel - 1]) * modStress / MINUT;
+                computer.Resource.Knowledge += double.Parse(knowledge.Increment.Split(',')[computer.Resource.KnowledgeLevel]) * modStress / MINUT;
 
             //ingenio
             if (computer.Resource.Ingenyous < maxResource)
-                computer.Resource.Ingenyous += double.Parse(ingenyous.Increment.Split(',')[computer.Resource.IngenyousLevel - 1]) * modStress / MINUT;
+                computer.Resource.Ingenyous += double.Parse(ingenyous.Increment.Split(',')[computer.Resource.IngenyousLevel]) * modStress / MINUT;
 
             //café
             if (computer.Resource.Coffe < maxResource)
-                computer.Resource.Coffe += double.Parse(coffee.Increment.Split(',')[computer.Resource.CoffeLevel - 1]) * modStress / MINUT;
+                computer.Resource.Coffe += double.Parse(coffee.Increment.Split(',')[computer.Resource.CoffeLevel]) * modStress / MINUT;
 
             //sleep
             computer.Resource.Stress = finalStress;

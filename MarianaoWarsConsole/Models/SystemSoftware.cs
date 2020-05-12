@@ -23,10 +23,10 @@ namespace MarianaoWars.Models
 
         public string Time { get; set; }
 
-        public string RequireKnowledge { get; set; }
+        public string NeedKnowledge { get; set; }
 
-        public string RequireIngenyous { get; set; }
+        public string NeedIngenyous { get; set; }
 
-        public string RequireCoffee { get; set; }
+        public string NeedCoffee { get; set; }
     }
 }
