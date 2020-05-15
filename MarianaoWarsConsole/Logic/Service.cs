@@ -63,6 +63,15 @@ namespace MarianaoWarsConsole.Logic
         #endregion
 
 
+        #region INSERT
+        public void CreateMessage(Message message)
+        {
+            dbContext.Message.Add(message);
+            dbContext.SaveChanges();
+        }
+        #endregion
+
+
 
         #region UPDATES
         public void UpdateComputer(Computer computer)

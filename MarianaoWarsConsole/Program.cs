@@ -38,7 +38,7 @@ namespace MarianaoWarsConsole
                         foreach (Computer computer in service.GetComputers(enrollment.Id))
                         {
                             List<BuildOrder> buildOrders = service.GetBuildOrder(computer.Id);
-                            Calcs(computer, institute, buildOrders);
+                            Calcs(computer, institute, buildOrders, enrollment);
 
                             service.UpdateComputer(computer);
                         }
@@ -56,7 +56,7 @@ namespace MarianaoWarsConsole
             systemSoftwares = service.GetSystemSoftware();
         }
 
-        private void Calcs(Computer computer, Institute institute, List<BuildOrder> buildOrders)
+        private void Calcs(Computer computer, Institute institute, List<BuildOrder> buildOrders, Enrollment enrollment)
         {
             //actualizar recursos
             MarianaoLogic.UpdateResources(computer, systemResources, systemSoftwares);
@@ -67,6 +67,8 @@ namespace MarianaoWarsConsole
                 if (DateTime.Compare(buildOrder.EndTime, DateTime.Now) < 0)
                 {
                     MarianaoLogic.UpdateBuilding(computer, buildOrder.BuildId);
+                    Message message = MarianaoLogic.GenerateMessage(enrollment, buildOrder);
+                    service.CreateMessage(message);
                     service.DeleteBuildOrder(buildOrder.Id);
                 } 
             }

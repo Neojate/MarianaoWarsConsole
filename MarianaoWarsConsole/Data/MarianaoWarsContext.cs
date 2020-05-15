@@ -31,6 +31,8 @@ namespace MarianaoWarsConsole.Data
 
         public DbSet<BuildOrder> BuildOrder { get; set; }
 
+        public DbSet<Message> Message { get; set; }
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

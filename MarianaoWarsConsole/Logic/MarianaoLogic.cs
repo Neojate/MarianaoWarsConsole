@@ -94,5 +94,17 @@ namespace MarianaoWarsConsole.Logic
             }
         }
 
+        public static Message GenerateMessage(Enrollment enrollment, BuildOrder buildOrder)
+        {
+            return new Message(
+                enrollment.InstituteId,
+                enrollment.UserId,
+                "",
+                "Sistema",
+                "Recurso actualizado",
+                string.Format("Se ha completado tu orden en fecha {0}", DateTime.Now)
+                );
+        }
+
     }
 }
