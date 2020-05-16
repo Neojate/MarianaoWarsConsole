@@ -19,7 +19,7 @@ namespace MarianaoWarsConsole.Logic
             //cálculo estrés
             int knowledgeStress = int.Parse(knowledge.Sleep.Split(',')[computer.Resource.KnowledgeLevel]);
             int ingenyousStress = int.Parse(ingenyous.Sleep.Split(',')[computer.Resource.IngenyousLevel]);
-            int coffeStress = int.Parse(coffee.Sleep.Split(',')[computer.Resource.CoffeLevel]);
+            int coffeStress = int.Parse(coffee.Sleep.Split(',')[computer.Resource.CoffeeLevel]);
             int currentStress = int.Parse(stress.Increment.Split(',')[computer.Resource.StressLevel]);
             int finalStress = currentStress - knowledgeStress - ingenyousStress - coffeStress;
 
@@ -40,8 +40,8 @@ namespace MarianaoWarsConsole.Logic
                 computer.Resource.Ingenyous += double.Parse(ingenyous.Increment.Split(',')[computer.Resource.IngenyousLevel]) * modStress / MINUT;
 
             //café
-            if (computer.Resource.Coffe < maxResource)
-                computer.Resource.Coffe += double.Parse(coffee.Increment.Split(',')[computer.Resource.CoffeLevel]) * modStress / MINUT;
+            if (computer.Resource.Coffee < maxResource)
+                computer.Resource.Coffee += double.Parse(coffee.Increment.Split(',')[computer.Resource.CoffeeLevel]) * modStress / MINUT;
 
             //sleep
             computer.Resource.Stress = finalStress;
@@ -60,7 +60,7 @@ namespace MarianaoWarsConsole.Logic
                     break;
 
                 case 3:
-                    computer.Resource.CoffeLevel += 1;
+                    computer.Resource.CoffeeLevel += 1;
                     break;
 
                 case 4:

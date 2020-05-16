@@ -23,7 +23,7 @@ namespace MarianaoWars.Models
         public double Ingenyous { get; set; }
 
         // Indica el almacenamiento de Café invertidos en el ordenador.
-        public double Coffe { get; set; }
+        public double Coffee { get; set; }
 
         // Indica el almacenamiento de Estrés invertidos en el ordenador.
         public double Stress { get; set; }
@@ -35,7 +35,7 @@ namespace MarianaoWars.Models
         public int IngenyousLevel { get; set; }
 
         // Indica el nivel de minas de Café del ordenador.
-        public int CoffeLevel { get; set; }
+        public int CoffeeLevel { get; set; }
 
         // Indica el nivel de minas de Estrés del ordenador.
         public int StressLevel { get; set; }
@@ -46,11 +46,11 @@ namespace MarianaoWars.Models
         {
             Knowledge = 1000;
             Ingenyous = 500;
-            Coffe = 100;
+            Coffee = 100;
             Stress = 30;
             KnowledgeLevel = 1;
             IngenyousLevel = 1;
-            CoffeLevel = 0;
+            CoffeeLevel = 0;
             StressLevel = 0;
         }
     }
