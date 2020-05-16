@@ -94,16 +94,69 @@ namespace MarianaoWarsConsole.Logic
             }
         }
 
-        public static Message GenerateMessage(Enrollment enrollment, BuildOrder buildOrder)
+        public static Message GenerateBuildMessage(Enrollment enrollment, Computer computer, BuildOrder buildOrder)
         {
             return new Message(
                 enrollment.InstituteId,
                 enrollment.UserId,
-                "",
+                computer.Name,
                 "Sistema",
-                "Recurso actualizado",
-                string.Format("Se ha completado tu orden en fecha {0}", DateTime.Now)
+                chooseBuildMessageTitle(buildOrder.BuildId),
+                chooseBuildMessageBody(buildOrder.BuildId, computer.Name)
                 );
+        }
+
+        private static string chooseBuildMessageTitle(int buildType)
+        {
+            switch (buildType / 20)
+            {
+                case 0:
+                    return "Aumento recurso finalizado.";
+                case 1:
+                    return "Actualización de software finalizada.";
+                case 2:
+                    return "Desarrollo de talento completado";
+                default: 
+                    return "Error"; 
+            }
+        }
+
+        private static string chooseBuildMessageBody(int buildType, string computerName)
+        {
+            switch (buildType / 20)
+            {
+                case 0:
+                    return string.Format("Se ha completado con éxito el aumento del recurso '{0}' en el ordenador '{1}' a las {2}.",
+                        buildIdName(buildType), computerName, DateTime.Now);
+                case 1:
+                    return string.Format("Se ha completado con éxito la actualización del software '{0}' en el ordenador '{1}' a las {2}.",
+                        buildIdName(buildType), computerName, DateTime.Now);
+                case 2:
+                    return string.Format("Se ha completado con éxito el desarrollo del talento '{0}' en el ordenador '{1}' a las {2}.",
+                        buildIdName(buildType), computerName, DateTime.Now);
+                default:
+                    return "Error al procesar el mensaje.";
+            }
+        }
+
+        private static string buildIdName(int buildType)
+        {
+            switch (buildType)
+            {
+                case 1: return "Conocimiento";
+                case 2: return "Ingenio";
+                case 4: return "Café";
+                case 3: return "Descanso";
+
+                case 21: return "Gedit";
+                case 22: return "Mysql";
+                case 23: return "GitHub";
+                case 24: return "Stack Overflow";
+                case 25: return "Postman";
+                case 26: return "VirtualBox";
+
+                default: return "";
+            }
         }
 
     }

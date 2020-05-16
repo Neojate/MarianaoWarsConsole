@@ -67,7 +67,7 @@ namespace MarianaoWarsConsole
                 if (DateTime.Compare(buildOrder.EndTime, DateTime.Now) < 0)
                 {
                     MarianaoLogic.UpdateBuilding(computer, buildOrder.BuildId);
-                    Message message = MarianaoLogic.GenerateMessage(enrollment, buildOrder);
+                    Message message = MarianaoLogic.GenerateBuildMessage(enrollment, computer, buildOrder);
                     service.CreateMessage(message);
                     service.DeleteBuildOrder(buildOrder.Id);
                 } 
