@@ -123,6 +123,38 @@ namespace MarianaoWarsConsole.Logic
                     computer.Talent.RsaLevel += 1;
                     break;
 
+                case 61:
+                    computer.Script.Comparator += 1;
+                    break;
+
+                case 62:
+                    computer.Script.Conditional += 1;
+                    break;
+
+                case 63:
+                    computer.Script.Iterator += 1;
+                    break;
+
+                case 64:
+                    computer.Script.Json += 1;
+                    break;
+
+                case 65:
+                    computer.Script.Class += 1;
+                    break;
+
+                case 66:
+                    computer.Script.BreakPoint += 1;
+                    break;
+
+                case 67:
+                    computer.Script.Throws += 1;
+                    break;
+
+                case 68:
+                    computer.Script.TryCatch += 1;
+                    break;
+
             }
         }
 
@@ -147,7 +179,9 @@ namespace MarianaoWarsConsole.Logic
                 case 1:
                     return "Actualización de software finalizada.";
                 case 2:
-                    return "Desarrollo de talento completado";
+                    return "Desarrollo de talento completado.";
+                case 3:
+                    return "Elaboración de script finalizado.";
                 default: 
                     return "Error"; 
             }
@@ -165,6 +199,9 @@ namespace MarianaoWarsConsole.Logic
                         buildIdName(buildType), computerName, DateTime.Now);
                 case 2:
                     return string.Format("Se ha completado con éxito el desarrollo del talento '{0}' en el ordenador '{1}' a las {2}.",
+                        buildIdName(buildType), computerName, DateTime.Now);
+                case 3:
+                    return string.Format("Se ha completado con éxito la elaboración del script '{0}' en el ordenador '{1}' a las {2}",
                         buildIdName(buildType), computerName, DateTime.Now);
                 default:
                     return "Error al procesar el mensaje.";
@@ -186,6 +223,25 @@ namespace MarianaoWarsConsole.Logic
                 case 24: return "Stack Overflow";
                 case 25: return "Postman";
                 case 26: return "VirtualBox";
+
+                case 41: return "Refactorización";
+                case 42: return "Herencia";
+                case 43: return "Inyección de Dependencias";
+                case 44: return "UDP";
+                case 45: return "Tcp/Ip";
+                case 46: return "SFTP";
+                case 47: return "ECB";
+                case 48: return "RSA";
+
+                case 61: return "Comparador";
+                case 62: return "Condicional";
+                case 63: return "Iterador";
+                case 64: return "Json";
+                case 65: return "Class";
+                case 66: return "Breakpoint";
+                case 67: return "Throws";
+                case 68: return "TryCatch";
+
 
                 default: return "";
             }
