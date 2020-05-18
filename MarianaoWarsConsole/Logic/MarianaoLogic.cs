@@ -29,7 +29,7 @@ namespace MarianaoWarsConsole.Logic
 
             //modificador por estrés
             double modStress = 1;
-            if (finalStress < 0) modStress = 0.5; //cambiar
+            if (finalStress < 0) modStress = 0.5;
 
             //conocimiento
             if (computer.Resource.Knowledge < maxResource)
@@ -89,6 +89,38 @@ namespace MarianaoWarsConsole.Logic
 
                 case 26:
                     computer.Software.VirtualMachineVersion += 1;
+                    break;
+
+                case 41:
+                    computer.Talent.RefactorLevel += 1;
+                    break;
+
+                case 42:
+                    computer.Talent.InheritanceLevel += 1;
+                    break;
+
+                case 43:
+                    computer.Talent.InjectionLevel += 1;
+                    break;
+
+                case 44:
+                    computer.Talent.UdpLevel += 1;
+                    break;
+
+                case 45:
+                    computer.Talent.TcpIpLevel += 1;
+                    break;
+
+                case 46:
+                    computer.Talent.SftpLevel += 1;
+                    break;
+
+                case 47:
+                    computer.Talent.EcbLevel += 1;
+                    break;
+
+                case 48:
+                    computer.Talent.RsaLevel += 1;
                     break;
 
             }
