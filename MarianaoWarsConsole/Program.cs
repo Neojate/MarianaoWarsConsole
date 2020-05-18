@@ -66,9 +66,14 @@ namespace MarianaoWarsConsole
             {
                 if (DateTime.Compare(buildOrder.EndTime, DateTime.Now) < 0)
                 {
+                    //aumenta el nivel de la estructura
                     MarianaoLogic.UpdateBuilding(computer, buildOrder.BuildId);
+
+                    //crea un mensaje de confirmación
                     Message message = MarianaoLogic.GenerateBuildMessage(enrollment, computer, buildOrder);
                     service.CreateMessage(message);
+
+                    //elimina la orden de construccion
                     service.DeleteBuildOrder(buildOrder.Id);
                 } 
             }
