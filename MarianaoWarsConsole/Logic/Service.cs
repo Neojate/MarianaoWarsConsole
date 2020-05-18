@@ -39,8 +39,7 @@ namespace MarianaoWarsConsole.Logic
                 .Include(computer => computer.Resource)
                 .Include(computer => computer.Software)
                 .Include(computer => computer.Talent)
-                .Include(computer => computer.AttackScript)
-                .Include(computer => computer.DefenseScript)
+                .Include(computer => computer.Script)
                 .ToList();
         }
 
