@@ -9,7 +9,7 @@ namespace MarianaoWarsConsole.Logic
     {
         private const int MINUT = 60;
 
-        public static void UpdateResources(Computer computer, List<SystemResource> systemResources, List<SystemSoftware> systemSoftwares)
+        public static void UpdateResources(Institute institute, Computer computer, List<SystemResource> systemResources, List<SystemSoftware> systemSoftwares)
         {
             SystemResource knowledge = systemResources[Resource.KNOWLEDGE];
             SystemResource ingenyous = systemResources[Resource.INGENYOUS];
@@ -28,8 +28,8 @@ namespace MarianaoWarsConsole.Logic
             int maxResource = int.Parse(mySql.Action1.Split(',')[computer.Software.MySqlVersion]);
 
             //modificador por estrés
-            double modStress = 1;
-            if (finalStress < 0) modStress = 0.5;
+            double modStress = 1 * institute.RateCost;
+            if (finalStress < 0) modStress = 0.5 * institute.RateCost;
 
             //conocimiento
             if (computer.Resource.Knowledge < maxResource)

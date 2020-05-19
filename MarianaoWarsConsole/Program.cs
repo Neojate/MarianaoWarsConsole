@@ -38,7 +38,7 @@ namespace MarianaoWarsConsole
                         foreach (Computer computer in service.GetComputers(enrollment.Id))
                         {
                             List<BuildOrder> buildOrders = service.GetBuildOrder(computer.Id);
-                            Calcs(computer, institute, buildOrders, enrollment);
+                            Calcs(institute, computer, buildOrders, enrollment);
 
                             service.UpdateComputer(computer);
                         }
@@ -56,10 +56,10 @@ namespace MarianaoWarsConsole
             systemSoftwares = service.GetSystemSoftware();
         }
 
-        private void Calcs(Computer computer, Institute institute, List<BuildOrder> buildOrders, Enrollment enrollment)
+        private void Calcs(Institute institute, Computer computer, List<BuildOrder> buildOrders, Enrollment enrollment)
         {
             //actualizar recursos
-            MarianaoLogic.UpdateResources(computer, systemResources, systemSoftwares);
+            MarianaoLogic.UpdateResources(institute, computer, systemResources, systemSoftwares);
 
             //actualizar órdenes de recursos
             foreach (BuildOrder buildOrder in buildOrders)
