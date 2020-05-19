@@ -33,6 +33,9 @@ namespace MarianaoWars.Models
         // Vida
         public double BaseIntegrity { get; set; }
 
+        // Capacidad de carga
+        public int Carry { get; set; }
+
         // Tiempo de construccion
         public int Time { get; set; }
 
