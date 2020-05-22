@@ -94,6 +94,7 @@ namespace MarianaoWarsConsole
                             TransportHackOrder transport = new TransportHackOrder(service, hackOrder, computerTo);
                             int[] report = transport.DoTransport();
                             transport.WriteTransportMesssage(enrollment, report);
+                            transport.WriteReceivermessage(institute.Id, computer, report);
                             break;
                     }
                 }

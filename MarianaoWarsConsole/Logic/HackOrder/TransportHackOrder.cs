@@ -95,6 +95,22 @@ namespace MarianaoWarsConsole.Logic
             context.CreateMessage(message);
         }
 
+        public void WriteReceivermessage(int instituteId, Computer computerFrom, int[] report)
+        {
+            Enrollment enrollment = CatchEnrollment(instituteId, computerTo.Id);
+            Message message = new Message(
+                enrollment.InstituteId,
+                enrollment.UserId,
+                "---",
+                "Sistema",
+                "Llegada del transporte",
+                string.Format("El transporte con origen '{0}' ha llegado al ordenador y ha dejado los siguientes recursos: {1} de Conocimiento, {2} de Ingenio y {3} de Café.",
+                    computerFrom.IpDirection, report[0], report[1], report[2])
+                );
+
+            context.CreateMessage(message);
+        }
+
         public void WriteReturnMessage(Enrollment enrollment, int[] report)
         {
             Message message = new Message(
@@ -114,6 +130,14 @@ namespace MarianaoWarsConsole.Logic
                 );
 
             context.CreateMessage(message);
+        }
+
+        private Enrollment CatchEnrollment(int instituteId, int computerId)
+        {
+            foreach (Enrollment enrollment in context.GetEnrollments(instituteId))
+                foreach (Computer computer in context.GetComputers(enrollment.Id))
+                    if (computer.Id == computerId) return enrollment;
+            return null;
         }
     }
 }
