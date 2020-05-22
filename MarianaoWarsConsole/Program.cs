@@ -38,7 +38,9 @@ namespace MarianaoWarsConsole
                         foreach (Computer computer in service.GetComputers(enrollment.Id))
                         {
                             List<BuildOrder> buildOrders = service.GetBuildOrder(computer.Id);
-                            Calcs(institute, computer, buildOrders, enrollment);
+                            List<HackOrder> hackOrders = service.GetHackOrders(computer.Id);
+
+                            Calcs(institute, computer, buildOrders, hackOrders, enrollment);
 
                             service.UpdateComputer(computer);
                         }
@@ -56,7 +58,7 @@ namespace MarianaoWarsConsole
             systemSoftwares = service.GetSystemSoftware();
         }
 
-        private void Calcs(Institute institute, Computer computer, List<BuildOrder> buildOrders, Enrollment enrollment)
+        private void Calcs(Institute institute, Computer computer, List<BuildOrder> buildOrders, List<HackOrder> hackOrders, Enrollment enrollment)
         {
             //actualizar recursos
             MarianaoLogic.UpdateResources(institute, computer, systemResources, systemSoftwares);
@@ -77,6 +79,41 @@ namespace MarianaoWarsConsole
                     service.DeleteBuildOrder(buildOrder.Id);
                 } 
             }
+
+            //actualizar órdenes de hack
+            foreach (HackOrder hackOrder in hackOrders)
+            {
+                //Ida
+                if (DateTime.Compare(hackOrder.EndTime, DateTime.Now) < 0 && !hackOrder.IsReturn)
+                {
+                    Computer computerTo = service.GetComputer(hackOrder.To);
+                    switch (hackOrder.Type)
+                    {
+                        //transporte
+                        case 3:
+                            TransportHackOrder transport = new TransportHackOrder(service, hackOrder, computerTo);
+                            int[] report = transport.DoTransport();
+                            transport.WriteTransportMesssage(enrollment, report);
+                            break;
+                    }
+                }
+
+                //Vuelta
+                if (DateTime.Compare(hackOrder.ReturnTime, DateTime.Now) < 0 && hackOrder.IsReturn)
+                {
+                    Computer computerTo = service.GetComputer(hackOrder.To);
+                    switch (hackOrder.Type)
+                    {
+                        //transporte
+                        case 3:
+                            TransportHackOrder transport = new TransportHackOrder(service, hackOrder, computerTo);
+                            int[] report = transport.DoReturn(computer);
+                            transport.WriteReturnMessage(enrollment, report);
+                            break;
+                    }
+                }
+            }
+
         }
 
     }

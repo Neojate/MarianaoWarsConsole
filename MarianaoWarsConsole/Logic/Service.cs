@@ -32,6 +32,17 @@ namespace MarianaoWarsConsole.Logic
                 .ToList();
         }
 
+        public Computer GetComputer(int computerId)
+        {
+            return dbContext.Computer
+                .Where(computer => computer.Id == computerId)
+                .Include(computer => computer.Resource)
+                .Include(computer => computer.Software)
+                .Include(computer => computer.Talent)
+                .Include(computer => computer.Script)
+                .FirstOrDefault();
+        }
+
         public List<Computer> GetComputers(int enrollmentId)
         {
             return dbContext.Computer
@@ -59,6 +70,13 @@ namespace MarianaoWarsConsole.Logic
                 .Where(order => order.ComputerId == computerId)
                 .ToList();
         }
+
+        public List<HackOrder> GetHackOrders(int computerId)
+        {
+            return dbContext.HackOrder
+                .Where(order => order.From == computerId)
+                .ToList();
+        }
         #endregion
 
 
@@ -78,6 +96,12 @@ namespace MarianaoWarsConsole.Logic
             dbContext.Update(computer);
             dbContext.SaveChanges();
         }
+
+        public void UpdateHackOrder(HackOrder hackOrder)
+        {
+            dbContext.Update(hackOrder);
+            dbContext.SaveChanges();
+        }
         #endregion
 
 
@@ -87,6 +111,12 @@ namespace MarianaoWarsConsole.Logic
         {
             BuildOrder buildOrder = dbContext.BuildOrder.Find(buildOrderId);
             dbContext.BuildOrder.Remove(buildOrder);
+            dbContext.SaveChanges();
+        }
+
+        public void DeleteHackOrder(HackOrder hackOrder)
+        {
+            dbContext.HackOrder.Remove(hackOrder);
             dbContext.SaveChanges();
         }
         #endregion

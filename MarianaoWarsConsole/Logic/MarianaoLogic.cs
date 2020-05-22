@@ -124,7 +124,7 @@ namespace MarianaoWarsConsole.Logic
                     break;
 
                 case 61:
-                    computer.Script.Comparator += 1;
+                    computer.Script.Variable += 1;
                     break;
 
                 case 62:
@@ -156,6 +156,28 @@ namespace MarianaoWarsConsole.Logic
                     break;
 
             }
+        }
+
+        public static void TransportHackOrder(Service service,  Computer computerTo, HackOrder hackOrder)
+        {
+            SystemSoftware systemSoftware = service.GetSystemSoftware()[Software.MYSQL];
+            int warehouse = int.Parse(systemSoftware.Action1.Split(',')[computerTo.Software.MySqlVersion]);
+
+            //se traspasan los recursos de las naves al ordenador
+            computerTo.Resource.Knowledge += hackOrder.Knowledge;
+            if (computerTo.Resource.Knowledge > warehouse) computerTo.Resource.Knowledge = warehouse;
+
+            computerTo.Resource.Ingenyous += hackOrder.Ingenyous;
+            if (computerTo.Resource.Ingenyous > warehouse) computerTo.Resource.Ingenyous = warehouse;
+
+            computerTo.Resource.Coffee += hackOrder.Coffee;
+            if (computerTo.Resource.Coffee > warehouse) computerTo.Resource.Coffee = warehouse;
+
+            service.UpdateComputer(computerTo);
+
+            //se vacía el hackOrder entero
+            
+
         }
 
         public static Message GenerateBuildMessage(Enrollment enrollment, Computer computer, BuildOrder buildOrder)
@@ -233,7 +255,7 @@ namespace MarianaoWarsConsole.Logic
                 case 47: return "ECB";
                 case 48: return "RSA";
 
-                case 61: return "Comparador";
+                case 61: return "Variable";
                 case 62: return "Condicional";
                 case 63: return "Iterador";
                 case 64: return "Json";
