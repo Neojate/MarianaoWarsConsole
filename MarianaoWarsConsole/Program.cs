@@ -94,7 +94,14 @@ namespace MarianaoWarsConsole
                             TransportHackOrder transport = new TransportHackOrder(service, hackOrder, computerTo);
                             int[] report = transport.DoTransport();
                             transport.WriteTransportMesssage(enrollment, report);
-                            transport.WriteReceivermessage(institute.Id, computer, report);
+                            transport.WriteReceiverMessage(institute.Id, computer, report);
+                            break;
+
+                        //colonizacion
+                        case 4:
+                            ColonizeHackOrder colonize = new ColonizeHackOrder(service, hackOrder, computerTo);
+                            string[] sreport = colonize.DoColonize(institute.Id, enrollment);
+                            colonize.WriteColonizeMessage(enrollment, sreport);
                             break;
 
                         //espionaje
@@ -118,6 +125,13 @@ namespace MarianaoWarsConsole
                             TransportHackOrder transport = new TransportHackOrder(service, hackOrder, computerTo);
                             transport.WriteReturnMessage(enrollment);
                             transport.DoReturn(computer);
+                            break;
+
+                        //colonizacion
+                        case 4:
+                            ColonizeHackOrder colonize = new ColonizeHackOrder(service, hackOrder, computerTo);
+                            colonize.WriteReturnMessage(enrollment);
+                            colonize.DoReturn(computer);
                             break;
 
                         //espionaje

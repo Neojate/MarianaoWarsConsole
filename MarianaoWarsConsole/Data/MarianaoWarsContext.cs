@@ -21,9 +21,7 @@ namespace MarianaoWarsConsole.Data
 
         public DbSet<Talent> Talent { get; set; }
 
-        public DbSet<AttackScript> AttackScript { get; set; }
-
-        public DbSet<DefenseScript> DefenseScript { get; set; }
+        public DbSet<Script> Script { get; set; }
 
         public DbSet<SystemResource> SystemResource { get; set; }
 

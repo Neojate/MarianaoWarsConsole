@@ -82,7 +82,7 @@ namespace MarianaoWarsConsole.Logic
             context.CreateMessage(message);
         }
 
-        public void WriteReceivermessage(int instituteId, Computer computerFrom, int[] report)
+        public void WriteReceiverMessage(int instituteId, Computer computerFrom, int[] report)
         {
             Enrollment enrollment = CatchEnrollment(instituteId, computerTo.Id);
             Message message = new Message(

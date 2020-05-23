@@ -91,6 +91,48 @@ namespace MarianaoWarsConsole.Logic
             dbContext.Message.Add(message);
             dbContext.SaveChanges();
         }
+
+        public Computer SaveComputer(Computer computer)
+        {
+            dbContext.Computer.Add(computer);
+            dbContext.SaveChanges();
+            return computer;
+        }
+
+        public Enrollment SaveEnrollment(Enrollment enrollment)
+        {
+            dbContext.Enrollment.Add(enrollment);
+            dbContext.SaveChanges();
+            return enrollment;
+        }
+
+        public Resource SaveResource(Resource resource)
+        {
+            dbContext.Resource.Add(resource);
+            dbContext.SaveChanges();
+            return resource;
+        }
+
+        public Script SaveScript(Script script)
+        {
+            dbContext.Script.Add(script);
+            dbContext.SaveChanges();
+            return script;
+        }
+
+        public Software SaveSoftware(Software software)
+        {
+            dbContext.Software.Add(software);
+            dbContext.SaveChanges();
+            return software;
+        }
+
+        public Talent SaveTalent(Talent talent)
+        {
+            dbContext.Talent.Add(talent);
+            dbContext.SaveChanges();
+            return talent;
+        }
         #endregion
 
 

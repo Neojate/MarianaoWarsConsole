@@ -91,7 +91,7 @@ namespace MarianaoWarsConsole.Logic
                 "Sistema",
                 "Reporte de Debug",
                 report == null ? 
-                    "El intento de debug al ordenador '{0}' ha sido un fracaso. Has perdido todos tus breakpoints" :
+                    string.Format("El intento de debug al ordenador '{0}' ha sido un fracaso. Has perdido todos tus breakpoints.", computerTo.IpDirection) :
                     string.Format("El intento de debug al ordenador '{0}' ha sido todo un éxito. El ordenador debugado tiene {1} de Conocimiento, {2} de Ingenio, {3} de Café, " +
                         "{4} Variables, {5} Condicionales, {6} Iteradores, {7} Jsons, {8} classes, {9} Breakpoints, {10} Throws y {11} TryCatch.",
                         computerTo.IpDirection, report[0], report[1], report[2], report[3], report[4], report[5], report[6], report[7], report[8], report[9], report[10])
@@ -110,7 +110,7 @@ namespace MarianaoWarsConsole.Logic
                 "Sistema",
                 report == null ? "Intento de Debug" : "Alerta, debug!",
                 report == null ?
-                    string.Format("Te han intentado debugar desde el ordenador {0}. Por suerte, su intento ha sido un fracaso", computerFrom.IpDirection) :
+                    string.Format("Te han intentado debugar desde el ordenador {0}. Por suerte, su intento ha sido un fracaso.", computerFrom.IpDirection) :
                     "Has sido debugado. Por desgracia no hemos podido determinar la procedencia del debug. Es mejor que te prepares por si acaso."
                 );
 
@@ -125,7 +125,7 @@ namespace MarianaoWarsConsole.Logic
                 "---",
                 "Sistema",
                 "Retorno del Debug",
-                string.Format("La misión de debug con destino {0} ha regresado al ordenador. Vuelven los siguientes scripts: {1}{2}{3}{4}{5}{6}",
+                string.Format("La misión de debug con destino {0} ha regresado al ordenador. Vuelven los siguientes scripts: {1}{2}{3}{4}{5}{6}.",
                     computerTo.IpDirection,
                     hackOrder.Variable != 0 ? hackOrder.Variable + " de variables, " : "",
                     hackOrder.Conditional != 0 ? hackOrder.Conditional + " de condicionales," : "",
