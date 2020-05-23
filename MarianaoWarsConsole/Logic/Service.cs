@@ -64,6 +64,11 @@ namespace MarianaoWarsConsole.Logic
             return dbContext.SystemSoftware.ToList();
         }
 
+        public List<SystemTalent> GetSystemTalents()
+        {
+            return dbContext.SystemTalent.ToList();
+        }
+
         public List<BuildOrder> GetBuildOrder(int computerId)
         {
             return dbContext.BuildOrder

@@ -96,6 +96,14 @@ namespace MarianaoWarsConsole
                             transport.WriteTransportMesssage(enrollment, report);
                             transport.WriteReceivermessage(institute.Id, computer, report);
                             break;
+
+                        //espionaje
+                        case 5:
+                            SpyHackOrder spy = new SpyHackOrder(service, hackOrder, computerTo);
+                            report = spy.DoSpy();
+                            spy.WriteSpyMessage(enrollment, report);
+                            spy.WriteReceivermessage(institute.Id, computer, report);
+                            break;
                     }
                 }
 
@@ -108,8 +116,15 @@ namespace MarianaoWarsConsole
                         //transporte
                         case 3:
                             TransportHackOrder transport = new TransportHackOrder(service, hackOrder, computerTo);
-                            int[] report = transport.DoReturn(computer);
-                            transport.WriteReturnMessage(enrollment, report);
+                            transport.WriteReturnMessage(enrollment);
+                            transport.DoReturn(computer);
+                            break;
+
+                        //espionaje
+                        case 5:
+                            SpyHackOrder spy = new SpyHackOrder(service, hackOrder, computerTo);
+                            spy.WriteReturnMessage(enrollment);
+                            spy.DoReturn(computer);
                             break;
                     }
                 }

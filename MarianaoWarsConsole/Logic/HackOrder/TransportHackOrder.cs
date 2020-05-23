@@ -53,19 +53,8 @@ namespace MarianaoWarsConsole.Logic
             return report;
         }
 
-        public int[] DoReturn(Computer computer)
+        public void DoReturn(Computer computer)
         {
-            //se genera el report
-            int[] report = new int[]
-            {
-                hackOrder.Variable,
-                hackOrder.Conditional,
-                hackOrder.Iterator,
-                hackOrder.Json,
-                hackOrder.Class,
-                hackOrder.BreakPoint
-            };
-
             //se retornan las naves
             computer.Script.Variable += hackOrder.Variable;
             computer.Script.Conditional += hackOrder.Conditional;
@@ -76,8 +65,6 @@ namespace MarianaoWarsConsole.Logic
 
             //se borra el hackorder
             context.DeleteHackOrder(hackOrder);
-
-            return report;
         }
 
         public void WriteTransportMesssage(Enrollment enrollment, int[] report)
@@ -111,7 +98,7 @@ namespace MarianaoWarsConsole.Logic
             context.CreateMessage(message);
         }
 
-        public void WriteReturnMessage(Enrollment enrollment, int[] report)
+        public void WriteReturnMessage(Enrollment enrollment)
         {
             Message message = new Message(
                 enrollment.InstituteId,
@@ -120,13 +107,13 @@ namespace MarianaoWarsConsole.Logic
                 "Sistema",
                 "Retorno del transporte",
                 string.Format("La misión de transporte con destino {0} ha regresado al ordenador. Vuelven los siguientes scripts: {1}{2}{3}{4}{5}{6}",
-                computerTo.IpDirection,
-                report[0] != 0 ? report[0] + " de variables, " : "",
-                report[1] != 0 ? report[1] + " de condicionales," : "",
-                report[2] != 0 ? report[2] + " de iteradores," : "",
-                report[3] != 0 ? report[3] + " de jsons," : "",
-                report[4] != 0 ? report[4] + " de classes," : "",
-                report[5] != 0 ? report[5] + " de breakpoints" : ".")
+                    computerTo.IpDirection,
+                    hackOrder.Variable != 0 ? hackOrder.Variable + " de variables, " : "",
+                    hackOrder.Conditional != 0 ? hackOrder.Conditional + " de condicionales," : "",
+                    hackOrder.Iterator != 0 ? hackOrder.Iterator + " de iteradores," : "",
+                    hackOrder.Json != 0 ? hackOrder.Json + " de jsons," : "",
+                    hackOrder.Class != 0 ? hackOrder.Class + " de classes," : "",
+                    hackOrder.BreakPoint != 0 ? hackOrder.BreakPoint + " de breakpoints" : ".")
                 );
 
             context.CreateMessage(message);

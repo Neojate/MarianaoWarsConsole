@@ -7,6 +7,15 @@ namespace MarianaoWars.Models
 {
     public class Talent
     {
+        public const int REFACTOR = 0;
+        public const int INHERIT = 1;
+        public const int INJECTION = 2;
+        public const int UDP = 3;
+        public const int TCPIP = 4;
+        public const int SFTP = 5;
+        public const int ECB = 6;
+        public const int RSA = 7;
+
         // ID del Talento. Primary Key Autoincremental.
         public int Id { get; set; }
 
