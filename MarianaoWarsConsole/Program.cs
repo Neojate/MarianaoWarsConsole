@@ -130,7 +130,7 @@ namespace MarianaoWarsConsole
                     switch (hackOrder.Type)
                     {
                         //ataque
-                        case 2:
+                        case 1:
                             AttackHackOrder attack = new AttackHackOrder(service, hackOrder, computer, computerTo);
                             attack.WriteReturnMessage();
                             attack.DoReturn();
