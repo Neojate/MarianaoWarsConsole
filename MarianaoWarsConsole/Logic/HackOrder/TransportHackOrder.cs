@@ -9,12 +9,14 @@ namespace MarianaoWarsConsole.Logic
     {
         private Service context;
         private HackOrder hackOrder;
+        private Computer computerFrom;
         private Computer computerTo;
 
-        public TransportHackOrder(Service service, HackOrder hackOrder, Computer computerTo)
+        public TransportHackOrder(Service service, HackOrder hackOrder, Computer computerFrom, Computer computerTo)
         {
             context = service;
             this.hackOrder = hackOrder;
+            this.computerFrom = computerFrom;
             this.computerTo = computerTo;
         }
 
@@ -53,25 +55,27 @@ namespace MarianaoWarsConsole.Logic
             return report;
         }
 
-        public void DoReturn(Computer computer)
+        public void DoReturn()
         {
             //se retornan las naves
-            computer.Script.Variable += hackOrder.Variable;
-            computer.Script.Conditional += hackOrder.Conditional;
-            computer.Script.Iterator += hackOrder.Iterator;
-            computer.Script.Json += hackOrder.Json;
-            computer.Script.Class += hackOrder.Class;
-            computer.Script.BreakPoint += hackOrder.BreakPoint;
+            computerFrom.Script.Variable += hackOrder.Variable;
+            computerFrom.Script.Conditional += hackOrder.Conditional;
+            computerFrom.Script.Iterator += hackOrder.Iterator;
+            computerFrom.Script.Json += hackOrder.Json;
+            computerFrom.Script.Class += hackOrder.Class;
+            computerFrom.Script.BreakPoint += hackOrder.BreakPoint;
 
             //se borra el hackorder
             context.DeleteHackOrder(hackOrder);
+
+            //se actualiza el computer
+            context.UpdateComputer(computerFrom);
         }
 
-        public void WriteTransportMesssage(Enrollment enrollment, int[] report)
+        public void WriteTransportMesssage(int[] report)
         {
             Message message = new Message(
-                enrollment.InstituteId,
-                enrollment.UserId,
+                computerFrom.Id,
                 "---",
                 "Sistema",
                 "Llegada del transporte",
@@ -82,12 +86,10 @@ namespace MarianaoWarsConsole.Logic
             context.CreateMessage(message);
         }
 
-        public void WriteReceiverMessage(int instituteId, Computer computerFrom, int[] report)
+        public void WriteReceiverMessage(int[] report)
         {
-            Enrollment enrollment = CatchEnrollment(instituteId, computerTo.Id);
             Message message = new Message(
-                enrollment.InstituteId,
-                enrollment.UserId,
+                computerTo.Id,
                 "---",
                 "Sistema",
                 "Llegada del transporte",
@@ -98,11 +100,10 @@ namespace MarianaoWarsConsole.Logic
             context.CreateMessage(message);
         }
 
-        public void WriteReturnMessage(Enrollment enrollment)
+        public void WriteReturnMessage()
         {
             Message message = new Message(
-                enrollment.InstituteId,
-                enrollment.UserId,
+                computerFrom.Id,
                 "---",
                 "Sistema",
                 "Retorno del transporte",
@@ -113,18 +114,11 @@ namespace MarianaoWarsConsole.Logic
                     hackOrder.Iterator != 0 ? hackOrder.Iterator + " de iteradores," : "",
                     hackOrder.Json != 0 ? hackOrder.Json + " de jsons," : "",
                     hackOrder.Class != 0 ? hackOrder.Class + " de classes," : "",
-                    hackOrder.BreakPoint != 0 ? hackOrder.BreakPoint + " de breakpoints" : ".")
+                    hackOrder.BreakPoint != 0 ? hackOrder.BreakPoint + " de breakpoints" : "")
                 );
 
             context.CreateMessage(message);
         }
 
-        private Enrollment CatchEnrollment(int instituteId, int computerId)
-        {
-            foreach (Enrollment enrollment in context.GetEnrollments(instituteId))
-                foreach (Computer computer in context.GetComputers(enrollment.Id))
-                    if (computer.Id == computerId) return enrollment;
-            return null;
-        }
     }
 }

@@ -9,16 +9,18 @@ namespace MarianaoWarsConsole.Logic
     {
         private Service context;
         private HackOrder hackOrder;
+        private Computer computerFrom;
         private Computer computerTo;
 
-        public ColonizeHackOrder(Service service, HackOrder hackOrder, Computer computerTo)
+        public ColonizeHackOrder(Service service, HackOrder hackOrder, Computer computerFrom, Computer computerTo)
         {
             context = service;
             this.hackOrder = hackOrder;
+            this.computerFrom = computerFrom;
             this.computerTo = computerTo;
         }
 
-        public string[] DoColonize(int instituteId, Enrollment enrollment)
+        public string[] DoColonize(Enrollment enrollment)
         {
             //inializamos los recursos
             Resource resource = context.SaveResource(new Resource());
@@ -73,25 +75,27 @@ namespace MarianaoWarsConsole.Logic
             return report;
         }
 
-        public void DoReturn(Computer computer)
+        public void DoReturn()
         {
             //se retornan las naves
-            computer.Script.Variable += hackOrder.Variable;
-            computer.Script.Conditional += hackOrder.Conditional;
-            computer.Script.Iterator += hackOrder.Iterator;
-            computer.Script.Json += hackOrder.Json;
-            computer.Script.Class += hackOrder.Class;
-            computer.Script.BreakPoint += hackOrder.BreakPoint;
+            computerFrom.Script.Variable += hackOrder.Variable;
+            computerFrom.Script.Conditional += hackOrder.Conditional;
+            computerFrom.Script.Iterator += hackOrder.Iterator;
+            computerFrom.Script.Json += hackOrder.Json;
+            computerFrom.Script.Class += hackOrder.Class;
+            computerFrom.Script.BreakPoint += hackOrder.BreakPoint;
 
             //se borra el hackorder
             context.DeleteHackOrder(hackOrder);
+
+            //se actualiza el computer
+            context.UpdateComputer(computerFrom);
         }
 
-        public void WriteColonizeMessage(Enrollment enrollment, string[] report)
+        public void WriteColonizeMessage(string[] report)
         {
             Message message = new Message(
-                enrollment.InstituteId,
-                enrollment.UserId,
+                computerFrom.Id,
                 "---",
                 "Sistema",
                 "Creación de ordenador",
@@ -102,11 +106,24 @@ namespace MarianaoWarsConsole.Logic
             context.CreateMessage(message);
         }
 
+        public void WriteReceiverMessage()
+        {
+            Message message = new Message(
+                computerTo.Id,
+                "---",
+                "Sistema",
+                "¡Ordenador conectado!",
+                string.Format("¡Enhorabuena! Tu ordenador con Ip '{0}' se ha conectado con éxito a la red",
+                    computerFrom.IpDirection)
+                );
+
+            context.CreateMessage(message);
+        }
+
         public void WriteReturnMessage(Enrollment enrollment)
         {
             Message message = new Message(
-                enrollment.InstituteId,
-                enrollment.UserId,
+                computerFrom.Id,
                 "---",
                 "Sistema",
                 "Retorno de la conexión",
@@ -117,7 +134,7 @@ namespace MarianaoWarsConsole.Logic
                     hackOrder.Iterator != 0 ? hackOrder.Iterator + " de iteradores," : "",
                     hackOrder.Json != 0 ? hackOrder.Json + " de jsons," : "",
                     hackOrder.Class != 0 ? hackOrder.Class + " de classes," : "",
-                    hackOrder.BreakPoint != 0 ? hackOrder.BreakPoint + " de breakpoints" : ".")
+                    hackOrder.BreakPoint != 0 ? hackOrder.BreakPoint + " de breakpoints" : "")
                 );
 
             context.CreateMessage(message);
@@ -125,8 +142,8 @@ namespace MarianaoWarsConsole.Logic
 
         private string generateName(Enrollment enrollment)
         {
-            int count = context.GetComputers(enrollment.Id).Count;
-            return "Ordenador " + count + 1;
+            int count = context.GetComputers(enrollment.Id).Count + 1; 
+            return "Ordenador " + count;
         }
     }
 }

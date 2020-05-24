@@ -25,6 +25,8 @@ namespace MarianaoWarsConsole.Data
 
         public DbSet<SystemResource> SystemResource { get; set; }
 
+        public DbSet<SystemScript> SystemScript { get; set; }
+
         public DbSet<SystemSoftware> SystemSoftware { get; set; }
 
         public DbSet<SystemTalent> SystemTalent { get; set; }

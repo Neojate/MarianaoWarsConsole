@@ -7,6 +7,15 @@ namespace MarianaoWars.Models
 {
     public class Script
     {
+        public const int VARIABLE = 0;
+        public const int CONDITIONAL = 1;
+        public const int ITERATOR = 2;
+        public const int JSON = 3;
+        public const int CLASS = 4;
+        public const int BREAKPOINT = 5;
+        public const int THROW = 6;
+        public const int TRYCATCH = 7;
+
         // Identificador del script. Primary Key autoincremental
         public int Id { get; set; }
 

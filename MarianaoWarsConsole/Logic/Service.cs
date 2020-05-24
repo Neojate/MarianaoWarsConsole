@@ -59,6 +59,11 @@ namespace MarianaoWarsConsole.Logic
             return dbContext.SystemResource.ToList();
         }
 
+        public List<SystemScript> GetSystemScripts()
+        {
+            return dbContext.SystemScript.ToList();
+        }
+
         public List<SystemSoftware> GetSystemSoftware()
         {
             return dbContext.SystemSoftware.ToList();

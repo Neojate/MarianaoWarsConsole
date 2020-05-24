@@ -89,27 +89,34 @@ namespace MarianaoWarsConsole
                     Computer computerTo = service.GetComputer(hackOrder.To);
                     switch (hackOrder.Type)
                     {
+                        //ataque
+                        case 1:
+                            AttackHackOrder attack = new AttackHackOrder(service, hackOrder, computerTo);
+                            attack.DoAttack();
+                            break;
+
                         //transporte
                         case 3:
-                            TransportHackOrder transport = new TransportHackOrder(service, hackOrder, computerTo);
+                            TransportHackOrder transport = new TransportHackOrder(service, hackOrder, computer, computerTo);
                             int[] report = transport.DoTransport();
-                            transport.WriteTransportMesssage(enrollment, report);
-                            transport.WriteReceiverMessage(institute.Id, computer, report);
+                            transport.WriteTransportMesssage(report);
+                            transport.WriteReceiverMessage(report);
                             break;
 
                         //colonizacion
                         case 4:
-                            ColonizeHackOrder colonize = new ColonizeHackOrder(service, hackOrder, computerTo);
-                            string[] sreport = colonize.DoColonize(institute.Id, enrollment);
-                            colonize.WriteColonizeMessage(enrollment, sreport);
+                            ColonizeHackOrder colonize = new ColonizeHackOrder(service, hackOrder, computer, computerTo);
+                            string[] sreport = colonize.DoColonize(enrollment);
+                            colonize.WriteColonizeMessage(sreport);
+                            colonize.WriteReceiverMessage();
                             break;
 
                         //espionaje
                         case 5:
-                            SpyHackOrder spy = new SpyHackOrder(service, hackOrder, computerTo);
+                            SpyHackOrder spy = new SpyHackOrder(service, hackOrder, computer, computerTo);
                             report = spy.DoSpy();
-                            spy.WriteSpyMessage(enrollment, report);
-                            spy.WriteReceivermessage(institute.Id, computer, report);
+                            spy.WriteSpyMessage(report);
+                            spy.WriteReceivermessage(report);
                             break;
                     }
                 }
@@ -122,23 +129,23 @@ namespace MarianaoWarsConsole
                     {
                         //transporte
                         case 3:
-                            TransportHackOrder transport = new TransportHackOrder(service, hackOrder, computerTo);
-                            transport.WriteReturnMessage(enrollment);
-                            transport.DoReturn(computer);
+                            TransportHackOrder transport = new TransportHackOrder(service, hackOrder, computer, computerTo);
+                            transport.WriteReturnMessage();
+                            transport.DoReturn();
                             break;
 
                         //colonizacion
                         case 4:
-                            ColonizeHackOrder colonize = new ColonizeHackOrder(service, hackOrder, computerTo);
+                            ColonizeHackOrder colonize = new ColonizeHackOrder(service, hackOrder, computer, computerTo);
                             colonize.WriteReturnMessage(enrollment);
-                            colonize.DoReturn(computer);
+                            colonize.DoReturn();
                             break;
 
                         //espionaje
                         case 5:
-                            SpyHackOrder spy = new SpyHackOrder(service, hackOrder, computerTo);
-                            spy.WriteReturnMessage(enrollment);
-                            spy.DoReturn(computer);
+                            SpyHackOrder spy = new SpyHackOrder(service, hackOrder, computer, computerTo);
+                            spy.WriteReturnMessage();
+                            spy.DoReturn();
                             break;
                     }
                 }
