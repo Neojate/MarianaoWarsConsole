@@ -72,7 +72,7 @@ namespace MarianaoWarsConsole
                     MarianaoLogic.UpdateBuilding(computer, buildOrder.BuildId);
 
                     //crea un mensaje de confirmación
-                    Message message = MarianaoLogic.GenerateBuildMessage(enrollment, computer, buildOrder);
+                    Message message = MarianaoLogic.GenerateBuildMessage(computer, buildOrder);
                     service.CreateMessage(message);
 
                     //elimina la orden de construccion

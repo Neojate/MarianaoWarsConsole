@@ -180,11 +180,10 @@ namespace MarianaoWarsConsole.Logic
 
         }
 
-        public static Message GenerateBuildMessage(Enrollment enrollment, Computer computer, BuildOrder buildOrder)
+        public static Message GenerateBuildMessage(Computer computer, BuildOrder buildOrder)
         {
             return new Message(
-                enrollment.InstituteId,
-                enrollment.UserId,
+                computer.Id,
                 computer.Name,
                 "Sistema",
                 chooseBuildMessageTitle(buildOrder.BuildId),
