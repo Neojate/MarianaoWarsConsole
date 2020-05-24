@@ -91,14 +91,16 @@ namespace MarianaoWarsConsole
                     {
                         //ataque
                         case 1:
-                            AttackHackOrder attack = new AttackHackOrder(service, hackOrder, computerTo);
-                            attack.DoAttack();
+                            AttackHackOrder attack = new AttackHackOrder(service, hackOrder, computer, computerTo);
+                            int[] report = attack.DoAttack();
+                            attack.WriteAttackMessage(report);
+                            attack.WriteReceiverMessage(report);
                             break;
 
                         //transporte
                         case 3:
                             TransportHackOrder transport = new TransportHackOrder(service, hackOrder, computer, computerTo);
-                            int[] report = transport.DoTransport();
+                            report = transport.DoTransport();
                             transport.WriteTransportMesssage(report);
                             transport.WriteReceiverMessage(report);
                             break;
@@ -127,6 +129,13 @@ namespace MarianaoWarsConsole
                     Computer computerTo = service.GetComputer(hackOrder.To);
                     switch (hackOrder.Type)
                     {
+                        //ataque
+                        case 2:
+                            AttackHackOrder attack = new AttackHackOrder(service, hackOrder, computer, computerTo);
+                            attack.WriteReturnMessage();
+                            attack.DoReturn();
+                            break;
+
                         //transporte
                         case 3:
                             TransportHackOrder transport = new TransportHackOrder(service, hackOrder, computer, computerTo);
@@ -137,7 +146,7 @@ namespace MarianaoWarsConsole
                         //colonizacion
                         case 4:
                             ColonizeHackOrder colonize = new ColonizeHackOrder(service, hackOrder, computer, computerTo);
-                            colonize.WriteReturnMessage(enrollment);
+                            colonize.WriteReturnMessage();
                             colonize.DoReturn();
                             break;
 

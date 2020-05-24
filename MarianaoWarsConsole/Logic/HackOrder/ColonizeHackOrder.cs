@@ -120,7 +120,7 @@ namespace MarianaoWarsConsole.Logic
             context.CreateMessage(message);
         }
 
-        public void WriteReturnMessage(Enrollment enrollment)
+        public void WriteReturnMessage()
         {
             Message message = new Message(
                 computerFrom.Id,
