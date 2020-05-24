@@ -106,7 +106,7 @@ namespace MarianaoWarsConsole.Logic
         public void WriteReceivermessage(int[] report)
         {
             Message message = new Message(
-                computerFrom.Id,
+                computerTo.Id,
                 "---",
                 "Sistema",
                 report == null ? "Intento de Debug" : "Alerta, debug!",

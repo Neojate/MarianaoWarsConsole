@@ -100,7 +100,25 @@ namespace MarianaoWarsConsole.Logic
 
                 if (currentAttackForce == attacker.Quantity && currentDefenseForce == defender.Quantity)
                     break;
-                
+
+                //guardamos los resultados del hackOrder
+                hackOrder.Variable = attackScripts[Script.VARIABLE];
+                hackOrder.Conditional = attackScripts[Script.CONDITIONAL];
+                hackOrder.Iterator = attackScripts[Script.ITERATOR];
+                hackOrder.Json = attackScripts[Script.JSON];
+                hackOrder.Class = attackScripts[Script.CLASS];
+                hackOrder.BreakPoint = attackScripts[Script.BREAKPOINT];
+
+                //guardamos los resultados del ordenador
+                computerTo.Script.Variable = defenseScripts[Script.VARIABLE];
+                computerTo.Script.Conditional = defenseScripts[Script.CONDITIONAL];
+                computerTo.Script.Iterator = defenseScripts[Script.ITERATOR];
+                computerTo.Script.Json = defenseScripts[Script.JSON];
+                computerTo.Script.Class = defenseScripts[Script.CLASS];
+                computerTo.Script.BreakPoint = defenseScripts[Script.BREAKPOINT];
+                computerTo.Script.Throws = defenseScripts[Script.THROW];
+                computerTo.Script.TryCatch = defenseScripts[Script.TRYCATCH];
+
             }
             while (currentAttackForce > 0 && currentDefenseForce > 0);
 
@@ -171,10 +189,18 @@ namespace MarianaoWarsConsole.Logic
 
         public void DoReturn()
         {
+            SystemSoftware systemSoftware = context.GetSystemSoftware()[Software.MYSQL];
+            int warehouse = int.Parse(systemSoftware.Action1.Split(',')[computerTo.Software.MySqlVersion]);
+
             //se retornan los recursos
             computerFrom.Resource.Knowledge += hackOrder.Knowledge;
+            if (computerFrom.Resource.Knowledge > warehouse) computerFrom.Resource.Knowledge = warehouse;
+
             computerFrom.Resource.Ingenyous += hackOrder.Ingenyous;
+            if (computerFrom.Resource.Ingenyous > warehouse) computerFrom.Resource.Ingenyous = warehouse;
+
             computerFrom.Resource.Coffee += hackOrder.Coffee;
+            if (computerFrom.Resource.Coffee > warehouse) computerFrom.Resource.Coffee = warehouse;
 
             //se retornan las naves
             computerFrom.Script.Variable += hackOrder.Variable;
@@ -199,7 +225,7 @@ namespace MarianaoWarsConsole.Logic
                 "Reporte del hacking",
                 report[0] == 1 ?
                     string.Format("El intento de hacking al ordenador '{0}' ha sido todo un éxito.", computerTo.IpDirection) :
-                    string.Format("El intento de hacking al ordenador '{0}' ha sido todo un fracaso")
+                    string.Format("El intento de hacking al ordenador '{0}' ha sido todo un fracaso.", computerTo.IpDirection)
                 );
 
             context.CreateMessage(message);
@@ -226,7 +252,7 @@ namespace MarianaoWarsConsole.Logic
                 computerFrom.Id,
                 "---",
                 "Sistema",
-                "Retorno del Debug",
+                "Retorno del hacking",
                 string.Format("La misión de hacking con destino {0} ha regresado al ordenador. Vuelven los siguientes scripts: {1}{2}{3}{4}{5}{6}.",
                     computerTo.IpDirection,
                     hackOrder.Variable != 0 ? hackOrder.Variable + " de variables, " : "",
