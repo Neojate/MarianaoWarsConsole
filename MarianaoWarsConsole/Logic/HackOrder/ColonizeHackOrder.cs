@@ -59,7 +59,8 @@ namespace MarianaoWarsConsole.Logic
                 hackOrder.Knowledge.ToString(),
                 hackOrder.Ingenyous.ToString(),
                 hackOrder.Coffee.ToString(),
-                computer.IpDirection
+                computer.IpDirection,
+                computer.Id.ToString()
             };
 
             hackOrder.Knowledge = 0;
@@ -106,10 +107,10 @@ namespace MarianaoWarsConsole.Logic
             context.CreateMessage(message);
         }
 
-        public void WriteReceiverMessage()
+        public void WriteReceiverMessage(string[] report)
         {
             Message message = new Message(
-                computerTo.Id,
+                int.Parse(report[4]),
                 "---",
                 "Sistema",
                 "¡Ordenador conectado!",

@@ -110,7 +110,7 @@ namespace MarianaoWarsConsole
                             ColonizeHackOrder colonize = new ColonizeHackOrder(service, hackOrder, computer, computerTo);
                             string[] sreport = colonize.DoColonize(enrollment);
                             colonize.WriteColonizeMessage(sreport);
-                            colonize.WriteReceiverMessage();
+                            colonize.WriteReceiverMessage(sreport);
                             break;
 
                         //espionaje
